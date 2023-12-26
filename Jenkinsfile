@@ -15,9 +15,10 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'docker run --rm my-python-app pytest -v'
+                sh 'docker run --rm my-python-app python -m unittest discover -v'
             }
         }
+
 
         stage('Cleanup') {
             steps {
