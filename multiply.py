@@ -1,22 +1,16 @@
-from prometheus_client import start_http_server, Gauge
-import psutil
-import time
+import unittest
 
-# Create gauges for CPU and memory usage
-CPU_USAGE = Gauge('cpu_usage', 'CPU usage percentage')
-MEMORY_USAGE = Gauge('memory_usage', 'Memory usage in bytes')
+# Assume this is your application logic
+def multiply(a, b):
+    return a * b
 
+# Here are your test cases
+class MultiplyTestCase(unittest.TestCase):
+    def test_multiply(self):
+        self.assertEqual(multiply(3, 5), 15)
+        self.assertEqual(multiply(-1, 2), -2)
+        self.assertEqual(multiply(0, 10), 0)
 
-def collect_system_metrics():
-    while True:
-        CPU_USAGE.set(psutil.cpu_percent())
-        MEMORY_USAGE.set(psutil.virtual_memory().used)
-        time.sleep(1)  # Collect metrics every second
-
-
+# This makes the test cases run when the file is executed
 if __name__ == '__main__':
-    # Start up the server to expose the metrics.
-    start_http_server(8001)
-
-    # Start collecting system metrics
-    collect_system_metrics()
+    unittest.main()
