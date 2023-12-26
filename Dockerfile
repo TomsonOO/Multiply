@@ -1,29 +1,14 @@
-pipeline {
-    agent any
+# Use an official Python runtime as a parent image
+FROM python:3
 
-    stages {
-        stage('Checkout') {
-            steps {
-                // Replace 'your-git-repo-url' with the actual URL of your Git repository
-                git 'your-git-repo-url'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'docker build -t my-python-app .'
-            }
-        }
-        stage('Test') {
-            steps {
-                // Run the Docker container which will execute the tests
-                sh 'docker run --rm my-python-app'
-            }
-        }
-        stage('Cleanup') {
-            steps {
-                // Clean up the built Docker image to save space
-                sh 'docker rmi my-python-app'
-            }
-        }
-    }
-}
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy the current directory contents into the container at /usr/src/app
+COPY . .
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Run test_multiply.py when the container launches
+CMD ["python", "-m", "unittest", "test_multiply.py"]

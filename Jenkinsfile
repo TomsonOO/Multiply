@@ -1,40 +1,28 @@
 pipeline {
     agent any
 
-    environment {
-        // Define environment variables if needed
-        DOCKER_IMAGE = 'my-python-app'
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                // Checks out the source code from Git repository
-                checkout scm
+                // Replace 'your-git-repo-url' with the actual URL of your Git repository
+                git 'your-git-repo-url'
             }
         }
         stage('Build') {
             steps {
-                // Builds a Docker image from your Dockerfile
-                script {
-                    docker.build("$DOCKER_IMAGE")
-                }
+                sh 'docker build -t my-python-app .'
             }
         }
         stage('Test') {
             steps {
-                // Runs tests inside the Docker container
-                script {
-                    docker.run("--rm $DOCKER_IMAGE python -m unittest discover")
-                }
+                // Run the Docker container which will execute the tests
+                sh 'docker run --rm my-python-app'
             }
         }
         stage('Cleanup') {
             steps {
-                // Optional: Clean up Docker images
-                script {
-                    sh "docker rmi $DOCKER_IMAGE"
-                }
+                // Clean up the built Docker image to save space
+                sh 'docker rmi my-python-app'
             }
         }
     }
