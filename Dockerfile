@@ -11,4 +11,4 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Run test_multiply.py when the container launches
-CMD ["python", "-m", "unittest", "test_multiply.py"]
+CMD ["python", "-m", "unittest", "multiply.py"]
