@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Replace 'your-git-repo-url' with the actual URL of your Git repository
-                git 'your-git-repo-url'
+                git 'https://github.com/TomsonOO/Multiply.git'
             }
         }
         stage('Build') {
