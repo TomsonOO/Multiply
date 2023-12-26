@@ -16,7 +16,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Run the Docker container which will execute the tests
-                sh 'docker run --rm my-python-app'
+                sh 'docker run --rm my-python-app python -m unittest discover -v'
             }
         }
         stage('Cleanup') {
