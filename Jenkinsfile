@@ -15,10 +15,10 @@ pipeline {
         }
         stage('Test') {
             steps {
-                // Run the Docker container which will execute the tests
-                sh 'docker run --rm my-python-app'
+                sh 'docker run --rm my-python-app pytest -v'
             }
         }
+
         stage('Cleanup') {
             steps {
                 // Clean up the built Docker image to save space
