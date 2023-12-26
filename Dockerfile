@@ -8,9 +8,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install any needed packages specified in requirements.txt
-# Your requirements.txt needs to include pytest for this to work
 RUN pip install --no-cache-dir -r requirements.txt
 
-# The CMD instruction defines the default command to run when starting the container
-# Here, we use pytest to run tests with verbose output
-CMD ["pytest", "-v"]
+# Run test_multiply.py when the container launches
+CMD ["python", "-m", "unittest", "multiply.py"]
